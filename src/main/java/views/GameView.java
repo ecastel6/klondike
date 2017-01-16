@@ -3,23 +3,25 @@ package views;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import models.CardSuit;
 import models.StackCard;
 import models.StackDeck;
 import models.StackLadder;
-import models.CardSuit;
 import tools.IO;
 
 public class GameView {
 
     private StackDeck deck;
+
     private ArrayList<StackLadder> ladders;
-    private Hashtable<CardSuit,StackCard> foundations;
+
+    private Hashtable<CardSuit, StackCard> foundations;
+
     private StackCard waste;
+
     private IO io;
 
-
-    public GameView(StackDeck deck, ArrayList<StackLadder> ladders, Hashtable<CardSuit,StackCard> foundations,
-            StackCard waste) {
+    public GameView(StackDeck deck, ArrayList<StackLadder> ladders, Hashtable<CardSuit, StackCard> foundations, StackCard waste) {
         this.deck = deck;
         this.ladders = ladders;
         this.foundations = foundations;
@@ -27,18 +29,17 @@ public class GameView {
         io = new IO();
     }
 
-    public void show(){
+    public void show() {
         showBoard();
-        showMenu();                
+        showMenu();
     }
-    
+
     public void showBoard() {
-        if(deck.getStackCard().isEmpty()){
+        if (deck.getStackCard().isEmpty()) {
             io.writeln("Baraja: []");
-        }else{
+        } else {
             io.writeln("Baraja: [X,X]");
         }
-
 
         io.writeln("Descarte:" + waste.toString());
 

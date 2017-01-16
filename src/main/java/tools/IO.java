@@ -47,13 +47,15 @@ public class IO {
         return inputNumber;
     }
 
-    public boolean isNumber (String input) {
+    public boolean isNumber(String input) {
         String regex = "[0-9]";
         if (input.matches(regex)) {
             return true;
-        };
+        }
+        ;
         return false;
     }
+
     public String readString(String title) {
         String input = null;
         boolean ok = false;
@@ -61,8 +63,8 @@ public class IO {
             this.write(title);
             try {
                 input = bufferedReader.readLine();
-                
-                if ((!input.isEmpty()) && (isNumber(input))) { 
+
+                if ((!input.isEmpty()) && (isNumber(input))) {
                     ok = true;
                 }
             } catch (NumberFormatException e) {

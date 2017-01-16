@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import models.Card;
+import models.CardSuit;
 import models.StackCard;
 import models.StackLadder;
-import models.CardSuit;
 import tools.IO;
 
 public class LadderToFoundationController {
@@ -21,7 +21,7 @@ public class LadderToFoundationController {
     }
 
     public void execute() {
-        int fromLadder = IO.getInstance().readInt("¿desde que escalera? (1-7):",1,7);
+        int fromLadder = IO.getInstance().readInt("¿desde que escalera? (1-7):", 1, 7);
         StackLadder ladder = ladders.get(fromLadder - 1);
         Card card = ladder.getStackCard().lastElement();
         StackCard foundation = foundations.get(card.getSuit());
