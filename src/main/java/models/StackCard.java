@@ -19,6 +19,10 @@ public class StackCard {
         }
     }
 
+    public int size() {
+        return this.stackCard.size();
+    }
+
     @Override
     public String toString() {
         String suiteString = "";

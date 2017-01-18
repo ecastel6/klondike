@@ -15,4 +15,5 @@ public class StackLadder extends StackCard {
             this.getStackCard().add(card);
         }
     }
+
 }

@@ -21,7 +21,7 @@ public class LadderToFoundationController {
     }
 
     public void execute() {
-        int fromLadder = IO.getInstance().readInt("¿desde que escalera? (1-7):", 1, 7);
+        int fromLadder = IO.getInstance().readLimitedInt("¿desde que escalera? (1-7):", 7);
         StackLadder ladder = ladders.get(fromLadder - 1);
         Card card = ladder.getStackCard().lastElement();
         StackCard foundation = foundations.get(card.getSuit());

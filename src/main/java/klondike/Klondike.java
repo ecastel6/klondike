@@ -34,7 +34,7 @@ public class Klondike {
 
     public void play() {
         do {
-            int menuOption = IO.getInstance().readInt("Opción (1-9): ", 1, 9);
+            int menuOption = IO.getInstance().readLimitedInt("Opción (1-9): ", 9);
             switch (menuOption) {
             case 1: {
                 new DeckToWasteController(game.getWaste(), game.getDeck()).execute();

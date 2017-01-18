@@ -21,7 +21,7 @@ public class WasteToDeckController {
                 deck.getStackCard().push(waste.getStackCard().pop());
             }
         } else {
-            IO.getInstance().writeln("El mazo de descarte aún tiene cartas");
+            IO.getInstance().writeln("Aun quedan cartas en el mazo de descarte");
         }
     }
 }

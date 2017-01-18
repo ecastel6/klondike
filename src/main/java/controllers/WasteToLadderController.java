@@ -22,7 +22,7 @@ public class WasteToLadderController {
         if (waste.getStackCard().isEmpty()) {
             IO.getInstance().writeln("Mazo de descartes vacio");
         } else {
-            int fromLadder = IO.getInstance().readInt("¿escalera de destino? (1-7):", 1, 7);
+            int fromLadder = IO.getInstance().readLimitedInt("¿escalera de destino? (1-7):", 1, 7);
             Card wasteCard = waste.getStackCard().lastElement();
             int wasteValue = wasteCard.getNumber().getCardValue();
             StackLadder escalera = ladders.get(fromLadder - 1);

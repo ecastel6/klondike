@@ -15,7 +15,7 @@ public class FlipCardController {
     }
 
     public void execute() {
-        int ladderPosition = IO.getInstance().readInt("¿de qué escalera? (1-7):", 1, 7);
+        int ladderPosition = IO.getInstance().readLimitedInt("¿de qué escalera? (1-7):", 1, 7);
         Card card = ladders.get(ladderPosition - 1).getStackCard().lastElement();
         if (!card.isHidden()) {
             IO.getInstance().writeln("Carta ya girada");
