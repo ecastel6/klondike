@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Game {
+    private static final int LADDERS_COUNT = 7;
+
     private StackDeck deck;
 
     private ArrayList<StackLadder> ladders;
@@ -12,7 +14,7 @@ public class Game {
 
     private StackCard waste;
 
-    private static final int LADDERS_COUNT = 7;
+    private State state;
 
     public Game() {
         deck = new StackDeck();
@@ -20,6 +22,7 @@ public class Game {
         ladders = new ArrayList<StackLadder>();
         foundations = new Hashtable<CardSuit, StackCard>();
         waste = new StackCard();
+        state = State.INITIALIZE;
         init();
     }
 
@@ -65,5 +68,13 @@ public class Game {
 
     public void setWaste(StackCard waste) {
         this.waste = waste;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }
