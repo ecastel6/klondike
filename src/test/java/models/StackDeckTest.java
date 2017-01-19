@@ -10,7 +10,7 @@ public class StackDeckTest {
     private StackDeck deck;
     
     @Before
-    public void init(){
+    public void setup(){
         deck = new StackDeck();
     }
     

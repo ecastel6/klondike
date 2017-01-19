@@ -10,7 +10,7 @@ public class StackCardTest {
     private StackCard stackCard;
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         stackCard = new StackCard();
     }
 

@@ -13,7 +13,6 @@ public class InitController extends OperationsController {
     @Override
     public void execute() {
         assert this.game != null;
-        assert this.game.getState() == State.INITIALIZE;
         this.game.setState(State.IN_GAME);
     }
 

@@ -12,7 +12,7 @@ public class CardTest {
     private Card card3;
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         card1 = new Card(CardNumber.AS, CardSuit.CORAZON,false);
         card2 = new Card(CardNumber.SEIS, CardSuit.PICA,false);
         card3 = new Card(CardNumber.K, CardSuit.TREBOL,false);

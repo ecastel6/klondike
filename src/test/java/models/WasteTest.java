@@ -12,7 +12,7 @@ public class WasteTest {
     private Card card2;
     
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         waste=new StackCard();
         card1 = new Card(CardNumber.SEIS, CardSuit.CORAZON, false);
         card2 = new Card(CardNumber.DIEZ, CardSuit.TREBOL, false);
