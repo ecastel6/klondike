@@ -1,30 +1,22 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-
 import models.Card;
-import models.CardSuit;
 import models.StackCard;
 import models.StackLadder;
 import tools.IO;
 
-public class LadderToFoundationController {
+public class LadderToFoundationController extends OperationsController {
 
-    private ArrayList<StackLadder> ladders;
-
-    private Hashtable<CardSuit, StackCard> foundations;
-
-    public LadderToFoundationController(ArrayList<StackLadder> ladders, Hashtable<CardSuit, StackCard> foundations) {
-        this.ladders = ladders;
-        this.foundations = foundations;
+    public LadderToFoundationController() {
+        super();
     }
 
+    @Override
     public void execute() {
         int fromLadder = IO.getInstance().readLimitedInt("¿desde que escalera? (1-7):", 7);
-        StackLadder ladder = ladders.get(fromLadder - 1);
+        StackLadder ladder = game.getLadders().get(fromLadder - 1);
         Card card = ladder.getStackCard().lastElement();
-        StackCard foundation = foundations.get(card.getSuit());
+        StackCard foundation = game.getFoundations().get(card.getSuit());
         if (foundation.getStackCard().isEmpty()) {
             if (card.getNumber().getCardValue() == 1) {
                 foundation.getStackCard().push(ladder.getStackCard().pop());

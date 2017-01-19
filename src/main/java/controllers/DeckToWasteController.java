@@ -5,25 +5,21 @@ import models.StackCard;
 import models.StackDeck;
 import tools.IO;
 
-public class DeckToWasteController {
+public class DeckToWasteController extends OperationsController {
 
-    private StackDeck deck;
-
-    private StackCard waste;
-
-    public DeckToWasteController(StackCard waste, StackDeck deck) {
-        this.waste = waste;
-        this.deck = deck;
+    public DeckToWasteController() {
+        super();
     }
 
+    @Override
     public void execute() {
-        if (deck.getStackCard().isEmpty()) {
+        if (game.getDeck().getStackCard().isEmpty()) {
             IO.getInstance().writeln("Baraja vacía");
         } else {
-            Card card = deck.getStackCard().pop();
+            Card card = game.getDeck().getStackCard().pop();
             card.setHidden(false);
-            waste.hiddenAll();
-            waste.getStackCard().push(card);
+            game.getWaste().hiddenAll();
+            game.getWaste().getStackCard().push(card);
         }
     }
 }

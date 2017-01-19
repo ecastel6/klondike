@@ -1,42 +1,35 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import models.Card;
-import models.StackCard;
 import models.StackLadder;
 import tools.IO;
 
-public class WasteToLadderController {
+public class WasteToLadderController extends OperationsController {
 
-    private StackCard waste;
-
-    private ArrayList<StackLadder> ladders;
-
-    public WasteToLadderController(StackCard waste, ArrayList<StackLadder> ladders) {
-        this.waste = waste;
-        this.ladders = ladders;
+    public WasteToLadderController() {
+        super();
     }
 
+    @Override
     public void execute() {
-        if (waste.getStackCard().isEmpty()) {
+        if (game.getWaste().getStackCard().isEmpty()) {
             IO.getInstance().writeln("Mazo de descartes vacio");
         } else {
             int fromLadder = IO.getInstance().readLimitedInt("¿escalera de destino? (1-7):", 1, 7);
-            Card wasteCard = waste.getStackCard().lastElement();
+            Card wasteCard = game.getWaste().getStackCard().lastElement();
             int wasteValue = wasteCard.getNumber().getCardValue();
-            StackLadder escalera = ladders.get(fromLadder - 1);
-            if (escalera.getStackCard().isEmpty()) {
+            StackLadder ladder = game.getLadders().get(fromLadder - 1);
+            if (ladder.getStackCard().isEmpty()) {
                 if (wasteValue == 13) {
-                    escalera.getStackCard().push(waste.getStackCard().pop());
+                    ladder.getStackCard().push(game.getWaste().getStackCard().pop());
                 } else {
                     IO.getInstance().writeln("Carta inválida");
                 }
             } else {
-                Card ladderCard = escalera.getStackCard().lastElement();
+                Card ladderCard = ladder.getStackCard().lastElement();
                 int ladderCardValue = ladderCard.getNumber().getCardValue();
                 if (wasteValue == ladderCardValue - 1) {
-                    escalera.getStackCard().push(waste.getStackCard().pop());
+                    ladder.getStackCard().push(game.getWaste().getStackCard().pop());
                 } else {
                     IO.getInstance().writeln("Carta inválida");
                 }

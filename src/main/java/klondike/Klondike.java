@@ -1,90 +1,61 @@
 package klondike;
 
-import controllers.DeckToWasteController;
 import controllers.ExitController;
-import controllers.FlipCardController;
-import controllers.FoundationToLadderController;
-import controllers.LadderToFoundationController;
-import controllers.LadderToLadderController;
-import controllers.WasteToDeckController;
-import controllers.WasteToFoundationController;
-import controllers.WasteToLadderController;
+import controllers.InitController;
+import controllers.OperationsController;
+import controllers.OptionBuilder;
 import models.Game;
-import tools.IO;
 import views.GameView;
 
 public class Klondike {
 
     private Game game;
 
-    boolean ok;
+    private views.GameView gameView;
 
-    private GameView gameView;
+    private OptionBuilder optionBuilder;
+
+    private InitController initController;
+
+    private ExitController exitController;
 
     public Klondike() {
         game = new Game();
         gameView = new GameView(game.getDeck(), game.getLadders(), game.getFoundations(), game.getWaste());
-        init();
-        play();
-    }
+        initController = new InitController();
+        optionBuilder = new OptionBuilder();
 
-    public void init() {
-        gameView.show();
     }
 
     public void play() {
+        OperationsController operationsController;
         do {
-            int menuOption = IO.getInstance().readLimitedInt("Opción (1-9): ", 9);
-            switch (menuOption) {
-            case 1: {
-                new DeckToWasteController(game.getWaste(), game.getDeck()).execute();
-                gameView.show();
-                break;
+            operationsController = getOperationsController();
+            if (operationsController != null) {
+                operationsController.setGame(game);
+                operationsController.execute();
             }
-            case 2: {
-                new WasteToDeckController(game.getWaste(), game.getDeck()).execute();
-                gameView.show();
-                break;
+
+            if (game.getState() == models.State.IN_GAME) {
+                gameView.showBoard();
             }
-            case 3: {
-                new WasteToFoundationController(game.getWaste(), game.getFoundations()).execute();
-                gameView.show();
-                break;
-            }
-            case 4: {
-                new WasteToLadderController(game.getWaste(), game.getLadders()).execute();
-                gameView.show();
-                break;
-            }
-            case 5: {
-                new LadderToFoundationController(game.getLadders(), game.getFoundations()).execute();
-                gameView.show();
-                break;
-            }
-            case 6: {
-                new LadderToLadderController(game.getLadders()).execute();
-                gameView.show();
-                break;
-            }
-            case 7: {
-                new FoundationToLadderController(game.getLadders(), game.getFoundations()).execute();
-                gameView.show();
-                break;
-            }
-            case 8: {
-                new FlipCardController(game.getLadders()).execute();
-                gameView.show();
-                break;
-            }
-            default: {
-                new ExitController().execute();
-                break;
-            }
-            }
-        } while (true);
+        } while (operationsController != null);
+    }
+
+    public OperationsController getOperationsController() {
+        switch (game.getState()) {
+        case INITIALIZE:
+            return initController;
+        case IN_GAME:
+            return optionBuilder.getOptionController();
+        case EXIT:
+            return exitController;
+        default:
+            return null;
+        }
     }
 
     public static void main(String[] args) {
-        new Klondike();
+        new Klondike().play();
     }
 }

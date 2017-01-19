@@ -1,22 +1,18 @@
 package controllers;
 
-import java.util.ArrayList;
-
 import models.Card;
-import models.StackLadder;
 import tools.IO;
 
-public class FlipCardController {
+public class FlipCardController extends OperationsController {
 
-    private ArrayList<StackLadder> ladders;
-
-    public FlipCardController(ArrayList<StackLadder> ladders) {
-        this.ladders = ladders;
+    public FlipCardController() {
+        super();
     }
 
+    @Override
     public void execute() {
         int ladderPosition = IO.getInstance().readLimitedInt("¿de qué escalera? (1-7):", 1, 7);
-        Card card = ladders.get(ladderPosition - 1).getStackCard().lastElement();
+        Card card = game.getLadders().get(ladderPosition - 1).getStackCard().lastElement();
         if (!card.isHidden()) {
             IO.getInstance().writeln("Carta ya girada");
         } else {
